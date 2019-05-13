@@ -15,7 +15,7 @@ import os
 import numpy as np
 import flask
 import pickle
-from flask import Flask, render_template, request
+from flask import Flask, render_template,url_for,request
 
 #creating instance of the class
 app=Flask(__name__)
@@ -157,6 +157,13 @@ def result():
     if request.method == 'POST':
         word_to_predict = request.form.to_string()
         result = m.predict(word_to_predict)
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
+
 
 
 
