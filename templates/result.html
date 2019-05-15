@@ -2,9 +2,51 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Prediction</title>
+    <link href="https://fonts.googleapis.com/css?family=Francois+One" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}">
+    <link rel="stylesheet"  type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet"  type="text/css" href="../static/style.css">
+
+
 </head>
 <body>
+<div class="results">
+    <h2 class="title">WHAT YOU INPUT</h2>
+    <div class="content">
+        <p> {{ input }}</p>
+    </div>
+    <br>
+    <br>
+    <h2 class="title">WHAT THE MODEL PREDICTED</h2>
+    <div class="content">
+	    <p>{{ prediction }}</p>
+    </div>
+</div>
+
+<div class="scroll">
+    <h1>K cool but.....</h1>
+    <h1>Majority of the text doesn't even make sense??</h1>
+
+</div>
+
+<div class="explain">
+    <h2>Here's Why (And a brief intro to how this thing works exactly)</h2>
+    <p>
+        Using the correct model and tweaking the parameters are very important for the accuracy of the machine learning
+        model. <br>
+        However no matter how well we choose the parameters, any machine learning model's accuracy and precision come at a cost of
+        long training times and an abundance of data. <br>
+        For this project the model only used part of Trumps' tweets because the entirety of his tweets would take a bit to long to
+        process, the model was also trained with cloud GPU and each epoch did indeed take up to 2.5 hours.
+        The model was trained on 14 epochs with a final loss value of 1.4507. <br>
+        It's quite obvious that the model needs more tweaking and training to get better results, for more information on how it is
+        built and how LSTM models work. click <a href="https://www.google.com"> here</a>.
+    </p>
+</div>
+
+<div style="height: 200px"></div>
+<button class="button"><a href={{ url_for('index')}}>Back</a></button>
 
 </body>
 </html>

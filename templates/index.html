@@ -3,8 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>Tweet Generator</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Francois+One" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}">
 </head>
 <body>
+
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-2">Tweet Like Trump</h1>
+    <p class="lead">This is a text generation application that uses a machine learning model<br> that was trained on
+        tens of thousands of Trump's tweets<br> and using it predict how trump would finish the text you input.</p>
+
+
+
+<div id="loading" style="display: none;"><img src="{{ url_for('static', filename='loading.gif') }}"/></div>
+</div>
+
+  </div>
+
+<div class="page-scroll">
+    <div class="wrapper">
+<form id="form" action="{{ url_for('predict')}}" method="POST">
+		<p>Enter Your Text Here</p>
+		<!-- <input type="text" name="comment"/> -->
+		<textarea name="comment" rows="6" cols="50" minlength="100" required id="sub"></textarea>
+		<br/>
+        <br/>
+        <button class='button' type="submit" form="form" value="predict"
+        onsubmit="var text = document.getElementById('sub').value; if(text.length < 100) { alert('Please enter at least 100 characters'); return false; } $('#loading').show(); return true;">Predict</button>
+
+</form>
+</div>
+</div>
 
 </body>
 </html>

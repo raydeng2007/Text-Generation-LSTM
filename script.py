@@ -26,6 +26,39 @@ app=Flask(__name__)
 def index():
     return flask.render_template('index.html')
 
+@app.route('/predict',methods=['POST'])
+def predict():
+    m = model()
+    print('loaded model')
+    input_words = request.form['comment']
+    if len(input_words) < 100:
+        # this needs to be at least 100
+        print('yo there something wrong here lil bro')
+    else:
+        pattern = []
+        input = input_words
+        input_words = input_words[-100:]
+        for char in input_words:
+            try:
+                pattern.append(self.char_to_int[char])
+            except:
+                pattern.append(0)
+        output = ''
+        for i in range(1000):
+            x = np.reshape(pattern, (1, len(pattern), 1))
+            x = x / float(m.n_vocab)
+            prediction = m.model.predict(x, verbose=0)
+            index = m.sample(prediction)
+            # index =  np.argmax(prediction)
+            result = m.int_to_char[index]
+            seq_in = [m.int_to_char[value] for value in pattern]
+            output = output+result
+            pattern.append(index)
+            pattern = pattern[1:len(pattern)]
+
+
+    return render_template('result.html', prediction=output, input=input)
+
 
 class model():
     def __init__(self):
@@ -108,7 +141,7 @@ class model():
 
         self.n_vocab = 37
 
-    def sample(preds, temperature=0.8):
+    def sample(self,preds, temperature=0.8):
         # helper function to sample an index from a probability array
         preds = np.asarray(preds[0]).astype('float64')
         preds = np.log(preds) / temperature
@@ -117,32 +150,7 @@ class model():
         probas = np.random.multinomial(1, preds, 1)
         return np.argmax(probas)
 
-    def predict(self, input_words, output_size=1000):
-        if len(input_words) < 100:
-            # this needs to be at least 100
-            print('yo there something wrong here lil bro')
-        else:
-            pattern = []
-            input_words = input_words[-100:]
-            for char in input_words:
-                try:
-                    pattern.append(self.char_to_int[char])
-                except:
-                    pattern.append(0)
 
-            for i in range(output_size):
-                x = np.reshape(pattern, (1, len(pattern), 1))
-                x = x / float(self.n_vocab)
-                prediction = model.predict(x, verbose=0)
-                index = self.sample(prediction)
-                # index =  np.argmax(prediction)
-                # print(prediction)
-                result = self.int_to_char[index]
-                seq_in = [self.int_to_char[value] for value in pattern]
-                sys.stdout.write(result)
-                pattern.append(index)
-                pattern = pattern[1:len(pattern)]
-            return result
 
 
 
@@ -160,6 +168,7 @@ def result():
 
 
 if __name__ == '__main__':
+
     app.run(debug=True)
 
 
