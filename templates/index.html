@@ -32,7 +32,7 @@
 		<br/>
         <br/>
         <button class='button' type="submit" form="form" value="predict"
-        onsubmit="var text = document.getElementById('sub').value; if(text.length < 100) { alert('Please enter at least 100 characters'); return false; } $('#loading').show(); return true;">Predict</button>
+        onclick="let text = document.getElementById('sub').value; if(text.length >= 100) { $('#loading').show(); return true; };">Predict</button>
 
 </form>
 </div>
