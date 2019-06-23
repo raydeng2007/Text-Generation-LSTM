@@ -4,7 +4,34 @@
     <meta charset="UTF-8">
     <title>Tweet Generator</title>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        $(document).ready(function(){
+            $('#results').hide();
+            //connect to the socket server.
+            var socket = io.connect();
+
+            //receive details from server
+            socket.on('my_response', function(msg) {
+                $('#result').append(msg.data);
+            });
+
+
+
+            $('form#form').submit(function(event) {
+                socket.emit('input', {data: $('#sub').val()});
+                $('#results').show();
+                return false;
+            });
+
+            $('#clear').click(function() {
+                $('#result').val('');
+                return false;
+            });
+        });
+    </script>
     <link href="https://fonts.googleapis.com/css?family=Francois+One" rel="stylesheet">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}">
 </head>
@@ -24,17 +51,29 @@
   </div>
 
 <div class="page-scroll">
-    <div class="wrapper">
-<form id="form" action="{{ url_for('predict')}}" method="POST">
+<div class="wrapper">
+<form id="form" action="#" method="POST">
 		<p>Enter Your Text Here</p>
 		<!-- <input type="text" name="comment"/> -->
 		<textarea name="comment" rows="6" cols="50" minlength="100" required id="sub"></textarea>
 		<br/>
         <br/>
-        <button class='button' type="submit" form="form" value="predict"
-        onclick="let text = document.getElementById('sub').value; if(text.length >= 100) { $('#loading').show(); return true; };">Predict</button>
-
+        <button class='button' type="submit"  value="predict"
+        onclick="let text = document.getElementById('sub').value; if(text.length >= 100) { return true; };">Predict</button>
 </form>
+<div class="result">
+
+
+<div id="results" style="display: none">
+		<p>Predicted results</p>
+		<!-- <input type="text" name="comment"/> -->
+		<textarea name="comment" rows="14" cols="80" id="result"></textarea>
+    <button id='clear'>clear</button>
+</div>
+
+</div>
+<br/>
+<br/>
 </div>
 </div>
 

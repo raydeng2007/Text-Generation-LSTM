@@ -69,6 +69,20 @@
     font-size:20px;
 }
 
+#results{
+    padding-top:50px;
+    margin-left: 23%;
+    width:50%;
+}
+#results p{
+    font-family: 'Francois One', sans-serif;
+    font-size:20px;
+}
+
+.result{
+    width: 100%;
+}
+
 .button {
   background-color: whitesmoke;
   border-color: green;
