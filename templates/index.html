@@ -21,7 +21,7 @@
             $('form#form').submit(function(event) {
                 socket.emit('input', {data: $('#sub').val()});
 
-
+                alert($('#sub').val());
                 $('#results').show();
                 return false;
             });
