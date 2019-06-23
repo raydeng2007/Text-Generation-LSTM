@@ -62,7 +62,7 @@ int_to_char = {0: ' ',
                    36: 'z'}
 n_vocab = 37
 
-is_text_box_empty=True
+
 #to tell flask what url should trigger the function index()
 @app.route('/',methods=['GET','POST'])
 @app.route('/index',methods=['GET','POST'])
@@ -72,17 +72,10 @@ def index():
 
 @socketio.on('input')
 def test_message(input_words):
-    global is_text_box_empty
     input_words = input_words['data']
-    if is_text_box_empty:
-
-        is_text_box_empty = False
-    else:
-        socketio.emit('clear')
-        #global is_text_box_empty
-        is_text_box_empty = True
-
     if len(input_words) < 100:
+        print(input_words)
+
         # this needs to be at least 100
         print('yo there something wrong here lil bro')
     else:

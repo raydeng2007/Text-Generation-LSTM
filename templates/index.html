@@ -3,10 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Tweet Generator</title>
-    <script
-  src="https://code.jquery.com/jquery-3.4.1.min.js"
-  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-  crossorigin="anonymous"></script>
+    <script src="//code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
     <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
@@ -21,18 +18,14 @@
                 $('#result').append(msg.data);
             });
 
-
-
             $('form#form').submit(function(event) {
                 socket.emit('input', {data: $('#sub').val()});
+
+
                 $('#results').show();
                 return false;
             });
 
-            $('#clear').click(function() {
-                $('#result').val('');
-                return false;
-            });
         });
     </script>
     <link href="https://fonts.googleapis.com/css?family=Francois+One" rel="stylesheet">
