@@ -1,5 +1,5 @@
-import gevent.monkey
-gevent.monkey.patch_all()
+import eventlet
+eventlet.monkey.patch_all()
 from keras.preprocessing.sequence import pad_sequences
 from keras.layers import Embedding, LSTM, Dense, Dropout, Flatten
 from keras.preprocessing.text import Tokenizer
@@ -111,7 +111,7 @@ def test_message(input_words):
             emit('my_response', {'data': result})
 
 if __name__ == '__main__':
-    socketio.run(app)
+    socketio.run(app,debug=True)
 
 
 
