@@ -1,5 +1,5 @@
-import eventlet
-eventlet.monkey.patch_all()
+import gevent.monkey
+gevent.monkey.patch_all()
 from keras.preprocessing.sequence import pad_sequences
 from keras.layers import Embedding, LSTM, Dense, Dropout, Flatten
 from keras.preprocessing.text import Tokenizer
@@ -16,7 +16,7 @@ import time
 from flask_socketio import SocketIO, emit
 
 
-#creating instance of the class
+
 
 app=Flask(__name__)
 socketio = SocketIO(app)
