@@ -1,3 +1,5 @@
+import gevent.monkey
+gevent.monkey.patch_all()
 from keras.preprocessing.sequence import pad_sequences
 from keras.layers import Embedding, LSTM, Dense, Dropout, Flatten
 from keras.preprocessing.text import Tokenizer
