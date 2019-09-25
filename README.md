@@ -1,0 +1,3 @@
+## Text Generation Using LSTM and socket.io
+
+A flask application that has an LSTM model trained for 14 hours on Trump's Twitter data which allows user input and predicts how trump would complete the sentence. The model has two hidden LSTM layers that use cross-entropy loss function and optimized with ADAM algorithm with a final loss value of 1.42. The application also uses web sockets to fetch live predictions asynchronously to drastically increase prediction speed. Running on Gunicorn server on Heroku.
