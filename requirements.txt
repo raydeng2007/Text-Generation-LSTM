@@ -9,7 +9,7 @@ python-socketio
 Keras-Applications==1.0.7
 Keras-Preprocessing==1.0.9
 nltk==3.2.4
-numpy==1.13.3
+numpy==1.22.0
 numpydoc==0.7.0
 packaging==19.0
 pandas==0.24.2
